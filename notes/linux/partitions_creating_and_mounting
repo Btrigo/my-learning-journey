@@ -1,0 +1,1107 @@
+# Linux Partitions and Mounting - Comprehensive Study Notes
+
+## Table of Contents
+1. [Storage Fundamentals](#storage-fundamentals)
+2. [Understanding Sectors and Partition Tables](#understanding-sectors-and-partition-tables)
+3. [Viewing Block Devices](#viewing-block-devices)
+4. [Partition Tables: DOS/MBR vs GPT](#partition-tables-dosmr-vs-gpt)
+5. [Creating Partitions with fdisk](#creating-partitions-with-fdisk)
+6. [Formatting Partitions](#formatting-partitions)
+7. [Mounting and Unmounting](#mounting-and-unmounting)
+8. [Persistent Mounting (/etc/fstab)](#persistent-mounting-etcfstab)
+9. [Important Commands Reference](#important-commands-reference)
+10. [Boot Systems: BIOS vs UEFI](#boot-systems-bios-vs-uefi)
+11. [Additional Tools](#additional-tools)
+12. [Quick Workflow Guide](#quick-workflow-guide)
+
+---
+
+## Storage Fundamentals
+
+### What is Storage?
+- **Also known as**: Block Device, Block Drive
+- **Purpose**: Hardware for storing files (documents, pictures, music, movies, OS files)
+- **Organization**: Files stored in folders (directories)
+
+### Types of Storage
+1. **Non-portable**: Installed inside computer cabinet
+   - Hard Disk Drives (HDD) - older, mechanical
+   - Solid State Drives (SSD) - modern, faster
+   
+2. **Portable**: External connection via USB interface
+   - External HDDs
+   - External SSDs
+   - USB flash drives
+
+### What is a Partition?
+A **partition** is a compartment created on a storage device to allocate specific amounts of storage for specific purposes. Think of it as dividing a physical disk into separate logical sections.
+
+**Key Concept**: Partitions are logical divisions of physical storage - like dividing a parking lot into zones. The physical disk doesn't change; you're just organizing it into ranges of sectors.
+
+---
+
+## Understanding Sectors and Partition Tables
+
+### Sectors - The Fundamental Unit
+
+A **sector** is the smallest unit of storage that a disk can read or write in a single operation.
+
+**Key Points**:
+- Typically **512 bytes** or **4096 bytes** (4K)
+- The disk's "atomic unit" of storage
+- Each sector is numbered sequentially: 0, 1, 2, 3, ..., N
+- Think of sectors like individual parking spaces in a lot
+
+### Sector Size Information
+
+When you run `fdisk -l /dev/sdb`, you see:
+```
+Sector size (logical/physical): 512 bytes / 512 bytes
+```
+
+- **Logical sector size**: What the OS thinks the sector size is
+- **Physical sector size**: What the hardware actually uses
+- **Modern drives**: Often use 4096-byte physical sectors but emulate 512-byte for compatibility (called "Advanced Format")
+
+### I/O Size
+```
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+```
+- **Minimum**: Smallest I/O operation the disk can handle
+- **Optimal**: Best size for I/O operations for performance
+- On RAID arrays or SSDs, optimal might be larger (4K or 1MB)
+
+### Partition Tables - The "Table of Contents"
+
+A **partition table** lives at the beginning of the disk and tells the system:
+- How many partitions exist
+- Where each partition starts and ends (in sectors)
+- What type each partition is
+
+**Important**: You must create a partition table BEFORE creating partitions.
+
+---
+
+## Viewing Block Devices
+
+### lsblk Command
+Lists all block devices and their partitions in a tree structure.
+
+```bash
+lsblk
+```
+
+**Output columns**:
+- **NAME**: Device name (sda, sdb, sdb1, etc.)
+- **MAJ:MIN**: Major and minor device numbers
+- **RM**: Removable device (1=yes, 0=no)
+- **SIZE**: Capacity
+- **RO**: Read-only (1=yes, 0=no)
+- **TYPE**: disk, part (partition), loop, rom
+- **MOUNTPOINTS**: Where it's mounted (if mounted)
+
+**Example**:
+```
+NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+sda      8:0    0  63.3M  0 disk
+├─sda1   8:1    0    1M   0 part
+├─sda2   8:2    0  513M   0 part /boot/efi
+└─sda3   8:3    0  19.5G  0 part /
+sdb      8:16   0    1G   0 disk
+sr0     11:0    1   2.3G  0 rom
+```
+
+### Device Naming Convention
+- **/dev/sda**: First disk (SATA/SCSI)
+- **/dev/sdb**: Second disk
+- **/dev/sda1**: First partition on first disk
+- **/dev/sda2**: Second partition on first disk
+- **/dev/vda**: Virtual disk (virtio drivers)
+
+**Note**: All storage devices are accessible as files in the `/dev/` directory.
+
+### Other Viewing Commands
+
+```bash
+# Show disk mounts and available space
+df -hT /dev/sd*
+
+# Show with human-readable sizes
+df -H
+
+# List block devices with filesystem info
+lsblk -f
+```
+
+---
+
+## Partition Tables: DOS/MBR vs GPT
+
+⚠️ **CORRECTION**: Your lab material states DOS supports "maximum of 16 partitions" - this is **partially correct** but needs clarification.
+
+### DOS/MBR (Master Boot Record)
+
+**History**: Created in 1983 for IBM PCs
+
+**Specifications**:
+- **Maximum disk size**: 2 TB
+- **Partition structure**:
+  - **4 primary partitions** maximum, OR
+  - **3 primary + 1 extended** partition
+  - Extended partition can contain **multiple logical partitions** (this is where 16+ comes from)
+- **Partition table location**: First 512 bytes of disk
+- **Disk label type**: `dos`
+
+**Limitation Example**:
+- Primary: sdb1, sdb2, sdb3
+- Extended: sdb4 (container)
+  - Logical: sdb5, sdb6, sdb7, ... sdb15+
+
+### GPT (GUID Partition Table)
+
+**History**: Modern standard (late 1990s/early 2000s)
+
+**Specifications**:
+- **Maximum disk size**: 9.7 ZB (zettabytes) - essentially unlimited
+- **Partitions**: Up to **128 primary partitions** by default
+- **Backup**: Stores backup partition table at end of disk (more reliable)
+- **Required for**: UEFI boot on disks >2TB
+- **Disk label type**: `gpt`
+
+### Size Units Reference
+```
+1024 bytes      = 1 kilobyte (KB)
+1024 kilobytes  = 1 megabyte (MB)
+1024 megabytes  = 1 gigabyte (GB)
+1024 gigabytes  = 1 terabyte (TB)
+1024 terabytes  = 1 petabyte (PB)
+1024 petabytes  = 1 exabyte (EB)
+1024 exabytes   = 1 zettabyte (ZB)
+```
+
+### Which Should You Use?
+
+**Use GPT when**:
+- Setting up any modern production system
+- Disk is larger than 2TB
+- Need more than 4 partitions without complex extended/logical setup
+- Using UEFI boot
+
+**Use DOS/MBR when**:
+- Working with legacy systems
+- Learning/lab environment with small disks
+- Compatibility with very old systems required
+
+---
+
+## Creating Partitions with fdisk
+
+### Starting fdisk
+
+```bash
+sudo fdisk /dev/sdb
+```
+
+This opens an interactive shell for working with the specified disk.
+
+### ⚠️ CRITICAL SAFETY FEATURE
+
+Changes are **NOT** immediately applied. They're only written when you execute the `w` command. This allows you to:
+- Experiment safely
+- Change your mind
+- Use `q` to quit without saving changes
+
+**WARNING**: When you create/destroy partitions, **all data on affected partitions is lost**.
+
+### Essential fdisk Commands
+
+**Help and Information**:
+- `m` - Display help menu (shows all commands)
+- `p` - Print current partition table
+
+**Creating Partition Tables**:
+- `g` - Create new empty GPT partition table
+- `o` - Create new empty DOS (MBR) partition table
+
+**Working with Partitions**:
+- `n` - Create a new partition
+- `d` - Delete a partition
+- `t` - Change partition type
+- `l` - List known partition types
+
+**Saving Changes**:
+- `w` - Write table to disk and exit (saves changes)
+- `q` - Quit without saving changes
+
+### Creating a GPT Partition Table
+
+1. Start fdisk: `sudo fdisk /dev/sdb`
+2. Create GPT table: `g`
+3. Verify: `p`
+
+You should see: `Disklabel type: gpt`
+
+### Creating Partitions Step-by-Step
+
+When creating a partition with `n`, you specify:
+1. **Partition number** (default is usually fine)
+2. **First sector** (default is usually fine - aligns properly)
+3. **Last sector** or **size**
+
+**Size Specification**:
+Use `+` followed by size and unit:
+- `+10M` = 10 megabytes
+- `+100M` = 100 megabytes
+- `+1G` = 1 gigabyte
+- `+5T` = 5 terabytes
+
+**Suffixes**: K (kilo), M (mega), G (giga), T (tera), P (peta)
+
+### Example: Creating Three Partitions
+
+```bash
+# Start fdisk
+sudo fdisk /dev/sdb
+
+# Create GPT table
+Command: g
+
+# Create first partition (10MB)
+Command: n
+Partition number: [Press Enter for default]
+First sector: [Press Enter for default]
+Last sector: +10M
+
+# Verify
+Command: p
+
+# Create second partition (100MB)
+Command: n
+Partition number: [Press Enter]
+First sector: [Press Enter]
+Last sector: +100M
+
+# Verify
+Command: p
+
+# Create third partition (500MB)
+Command: n
+Partition number: [Press Enter]
+First sector: [Press Enter]
+Last sector: +500M
+
+# Verify final layout
+Command: p
+
+# Save and exit
+Command: w
+```
+
+### Understanding Partition Alignment
+
+Modern partitions typically start at sector **2048** (not sector 0 or 1).
+
+**Why?**
+- 2048 × 512 bytes = 1,048,576 bytes = **1 MiB**
+- This aligns with modern disk geometries (4K sectors, SSD erase blocks)
+- Improves performance
+
+### Verifying Partition Creation
+
+After writing with `w`, verify using:
+```bash
+lsblk
+```
+
+You should see:
+```
+sdb      8:16   0    1G  0 disk
+├─sdb1   8:17   0   10M  0 part
+├─sdb2   8:18   0  100M  0 part
+└─sdb3   8:19   0  500M  0 part
+```
+
+---
+
+## Formatting Partitions
+
+### Why Format?
+
+Before you can use a partition, you must **format** it to create a **filesystem**. A filesystem provides the ability to:
+- Store data as files and directories
+- Organize file hierarchy
+- Track file metadata (permissions, timestamps, ownership)
+
+### Common Linux Filesystems
+
+- **ext4**: Most common Linux filesystem (default for most distributions)
+- **ext3**: Older version of ext4
+- **xfs**: High-performance filesystem (default on RHEL/CentOS)
+- **btrfs**: Modern copy-on-write filesystem
+- **vfat/fat32**: Compatible with Windows (for USB drives)
+- **ntfs**: Windows filesystem (read/write with ntfs-3g)
+
+### Creating an ext4 Filesystem
+
+```bash
+sudo mkfs.ext4 /dev/sdb1
+```
+
+**What happens**:
+- Creates filesystem with 2560 4k blocks and 2560 inodes
+- Allocates group tables
+- Writes inode tables
+- Creates journal (for data integrity)
+- Writes superblocks and filesystem accounting information
+
+**Format all three partitions**:
+```bash
+sudo mkfs.ext4 /dev/sdb1
+sudo mkfs.ext4 /dev/sdb2
+sudo mkfs.ext4 /dev/sdb3
+```
+
+### Other mkfs Commands
+
+```bash
+# See all mkfs variants
+ls -l /usr/sbin/mkfs*
+
+# Format as different filesystems
+sudo mkfs.xfs /dev/sdb1
+sudo mkfs.vfat /dev/sdb1
+sudo mkfs.ntfs /dev/sdb1
+
+# ext4 is actually mke2fs
+which mkfs.ext4  # Shows it's linked to mke2fs
+```
+
+### Checking Filesystem Type
+
+```bash
+lsblk -f
+# Shows filesystem type for each partition
+```
+
+---
+
+## Mounting and Unmounting
+
+### What is Mounting?
+
+**Mounting** attaches a partition to a directory in your filesystem tree. Once mounted:
+- The partition's contents appear in that directory
+- You can access files using normal commands (cd, ls, touch, mkdir, rm)
+- All changes happen on the partition
+
+**Key Rule**: All changes to a partition must be made in its mount directory.
+
+### Temporary Mounting (Lost After Reboot)
+
+#### Step 1: Create Mount Point Directories
+
+```bash
+mkdir one two three
+# Or: mkdir /mnt/partition1 /mnt/partition2
+```
+
+**Mount point** = the directory where you attach the partition
+
+#### Step 2: Mount Partitions
+
+```bash
+sudo mount /dev/sdb1 one
+sudo mount /dev/sdb2 two
+sudo mount /dev/sdb3 three
+```
+
+**Syntax**: `sudo mount <partition> <mount-point>`
+
+**Alternative with filesystem specification**:
+```bash
+sudo mount -t ext4 /dev/sdb1 /home/student/one
+```
+
+#### Step 3: Verify Mount
+
+```bash
+df
+# Or for more detail
+df -hT
+```
+
+**Output shows**:
+- Filesystem (e.g., /dev/sdb1)
+- Size, Used, Available space
+- Use% (percentage used)
+- Mounted on (mount point)
+
+**Example**:
+```
+Filesystem     Size  Used Avail Use% Mounted on
+/dev/sdb1      5.5M   24K  4.7M   1% /home/student/one
+```
+
+### Using Mounted Partitions
+
+Once mounted, use normal commands:
+```bash
+cd one
+touch myfile.txt
+mkdir mydir
+ls -la
+echo "data" > file.txt
+cat file.txt
+```
+
+### Unmounting Partitions
+
+You can unmount by **partition name** OR **mount point**:
+
+```bash
+# By mount point
+sudo umount one
+
+# By partition
+sudo umount /dev/sdb1
+```
+
+**Verify unmount**:
+```bash
+df
+# The partition should no longer appear
+```
+
+**Important**: Cannot unmount if:
+- You're currently in the mount directory (cd elsewhere first)
+- Another process is using files on the partition
+
+### Mount Point Best Practices
+
+Common locations for mount points:
+- `/mnt/` - Temporary mounts
+- `/media/` - Removable media (auto-mounted USB drives)
+- `/home/username/` - User's personal directories
+- Custom locations as needed
+
+---
+
+## Persistent Mounting (/etc/fstab)
+
+### The Problem
+
+When you mount with the `mount` command, it's **temporary**:
+- Lost after system reboot
+- Must be re-issued every time
+
+### The Solution: /etc/fstab
+
+The **/etc/fstab** file (filesystem table) configures partitions to **auto-mount at boot**.
+
+### Understanding /etc/fstab Format
+
+Each line represents one mount entry with **6 fields** separated by spaces or tabs:
+
+```
+<device> <mount-point> <filesystem-type> <options> <dump> <pass>
+```
+
+**Field 1 - Device**:
+- Device path: `/dev/sdb1`
+- OR UUID: `UUID=c13a2e71-3919-42d3-9098-b0562981d43a`
+
+**Field 2 - Mount Point**:
+- Directory where partition will be mounted
+- Must already exist
+- Example: `/home/student/one`
+
+**Field 3 - Filesystem Type**:
+- `ext4`, `xfs`, `vfat`, `ntfs`, `swap`, etc.
+
+**Field 4 - Options**:
+- `defaults` - use default mount options
+- `errors=remount-ro` - remount read-only on errors
+- `loop` - mount as loop device
+- Multiple options separated by commas
+
+**Field 5 - Dump**:
+- Legacy backup frequency field
+- **Always use 0**
+
+**Field 6 - Pass (fsck order)**:
+- Disk check pass number during boot
+- `0` = skip disk check
+- `1` = root filesystem (checked first)
+- `2` = other filesystems (checked after root)
+
+### Viewing Current fstab
+
+```bash
+cat /etc/fstab
+```
+
+**Example output**:
+```
+# <file system>  <mount point>  <type>  <options>  <dump>  <pass>
+UUID=c13a2e71... /              ext4    errors=remount-ro  0  1
+UUID=2733-E3BC   /boot/efi      vfat    umask=0077         0  1
+/swapfile        none           swap    sw                 0  0
+```
+
+**Lines starting with `#`** are comments (ignored).
+
+### Adding Persistent Mounts
+
+#### Step 1: Create Mount Point Directories
+
+```bash
+mkdir -p /home/student/one
+mkdir -p /home/student/two
+mkdir -p /home/student/three
+```
+
+The `-p` flag creates parent directories if needed.
+
+#### Step 2: Edit /etc/fstab
+
+```bash
+sudo nano /etc/fstab
+```
+
+#### Step 3: Add Mount Entries
+
+Add these lines to the end of the file:
+```
+/dev/sdb1  /home/student/one    ext4  defaults  0  0
+/dev/sdb2  /home/student/two    ext4  defaults  0  0
+/dev/sdb3  /home/student/three  ext4  defaults  0  0
+```
+
+#### Step 4: Save and Exit
+
+In nano:
+1. Press `Ctrl+X`
+2. Type `y` to confirm save
+3. Press `Enter` to confirm filename
+
+#### Step 5: Verify Changes
+
+```bash
+cat /etc/fstab
+```
+
+Confirm your entries are there.
+
+#### Step 6: Test Mount Configuration
+
+```bash
+sudo mount -a
+```
+
+**What this does**:
+- Mounts all entries in /etc/fstab
+- Skips already-mounted partitions
+- Returns no output if successful
+- Shows errors if configuration is wrong
+
+**If errors appear**:
+1. Check syntax in /etc/fstab
+2. Ensure mount points exist
+3. Fix errors and run `sudo mount -a` again
+
+#### Step 7: Verify Mounts
+
+```bash
+df -hT
+```
+
+All three partitions should now be mounted.
+
+#### Step 8: Test Reboot
+
+```bash
+sudo reboot
+```
+
+After reboot:
+```bash
+df -hT
+```
+
+Partitions should still be mounted automatically!
+
+### Using UUIDs Instead of Device Names
+
+**Why use UUIDs?**
+- Device names can change (/dev/sdb might become /dev/sdc)
+- UUIDs are permanent identifiers
+- More reliable for production systems
+
+**Find UUID**:
+```bash
+lsblk -f
+# Or
+blkid /dev/sdb1
+```
+
+**fstab entry with UUID**:
+```
+UUID=abc12345-def6-7890-ghij-klmnopqrstuv  /home/student/one  ext4  defaults  0  0
+```
+
+---
+
+## Important Commands Reference
+
+### Block Device Management
+
+```bash
+# List all block devices
+lsblk
+
+# List with filesystem information
+lsblk -f
+
+# Show disk free space (human readable)
+df -h
+
+# Show disk free space with filesystem types
+df -hT
+
+# Show only specific devices
+df -hT /dev/sd*
+```
+
+### Partition Management
+
+```bash
+# Open fdisk interactive shell
+sudo fdisk /dev/sdb
+
+# List partition table (non-interactive)
+sudo fdisk -l /dev/sdb
+
+# Alternative: parted (supports GPT better)
+sudo parted /dev/sdb
+
+# Alternative: gdisk (GPT-specific)
+sudo gdisk /dev/sdb
+```
+
+### Formatting
+
+```bash
+# Format as ext4
+sudo mkfs.ext4 /dev/sdb1
+
+# Format as xfs
+sudo mkfs.xfs /dev/sdb1
+
+# Format as vfat (FAT32)
+sudo mkfs.vfat /dev/sdb1
+
+# List all mkfs variants
+ls -l /usr/sbin/mkfs*
+```
+
+### Mounting and Unmounting
+
+```bash
+# Mount partition
+sudo mount /dev/sdb1 /mnt/partition1
+
+# Mount with filesystem type specified
+sudo mount -t ext4 /dev/sdb1 /mnt/partition1
+
+# Mount all fstab entries
+sudo mount -a
+
+# Unmount by mount point
+sudo umount /mnt/partition1
+
+# Unmount by device
+sudo umount /dev/sdb1
+
+# Force unmount (dangerous!)
+sudo umount -f /mnt/partition1
+
+# Lazy unmount (detach now, clean up when no longer busy)
+sudo umount -l /mnt/partition1
+```
+
+### Checking Filesystems
+
+```bash
+# Check filesystem for errors
+sudo fsck /dev/sdb1
+
+# Force check even if filesystem appears clean
+sudo fsck -f /dev/sdb1
+
+# Automatically fix errors (use with caution!)
+sudo fsck -y /dev/sdb1
+
+# Specific filesystem checkers
+sudo fsck.ext4 /dev/sdb1
+sudo xfs_repair /dev/sdb1
+```
+
+**Important**: Always unmount partition before running fsck!
+
+### File Operations
+
+```bash
+# List files with permissions
+ls -l /mnt
+
+# List recursively
+ls -lR /mnt
+
+# Change ownership
+sudo chown user:group /mnt/file
+
+# Change permissions
+sudo chmod 755 /mnt/directory
+
+# Remove files/directories forcefully and recursively
+rm -rf /path/to/directory
+```
+
+---
+
+## Boot Systems: BIOS vs UEFI
+
+### BIOS (Legacy Boot)
+
+**How it works**:
+- Uses **Master Boot Record (MBR)** in first 512 bytes of disk
+- MBR contains boot loader and partition table
+- Finds which partition is bootable
+- Limited to 2TB disks
+
+**Requires**: DOS/MBR partition table
+
+### UEFI (Modern Boot)
+
+**How it works**:
+- Uses **GUID Partition Table (GPT)**
+- Requires special **EFI System Partition (ESP)** formatted as FAT32
+- Boot loader stored as `.efi` files in ESP
+- Supports disks >2TB
+- More secure (Secure Boot feature)
+
+**Requires**: GPT partition table
+
+**EFI System Partition**:
+- Usually mounted at `/boot/efi`
+- Formatted as `vfat` (FAT32)
+- Contains bootloader files
+
+---
+
+## Additional Tools
+
+### fsck - Filesystem Consistency Check
+
+**Purpose**: Check filesystems for errors or outstanding issues
+
+**When to use**:
+- Preventative maintenance
+- System fails to boot
+- After unclean shutdown
+- Checking health of external drives
+
+**Important Rules**:
+1. **Always unmount before fsck**
+2. Or run on unmounted partitions only
+3. Root filesystem check happens at boot (if configured)
+
+```bash
+# Unmount first!
+sudo umount /dev/sdb1
+
+# Then check
+sudo fsck /dev/sdb1
+```
+
+### Loop Devices
+
+**What are they?**
+- Make a file appear as a block device
+- Useful for mounting ISO images
+- Used by snap packages
+
+**Mount ISO as loop device**:
+```bash
+sudo mount -o loop -t iso9660 /path/to/file.iso /mnt/iso
+```
+
+### Character Devices vs Block Devices
+
+**Block devices** (`lsblk`):
+- Data accessed in blocks (chunks)
+- Can be randomly accessed
+- Examples: Hard drives, SSDs, USB drives
+
+**Character devices**:
+- Data accessed as stream of characters
+- Serial access only
+- Examples: Serial ports, terminals
+
+### Important System Directories
+
+**/var** - Variable data:
+- Logs (`/var/log`)
+- Mail (`/var/mail`)
+- Can expand significantly
+
+**/dev** - Device files:
+- All hardware devices represented as files
+- `sda`, `sdb` = block devices
+- `tty`, `pts` = character devices
+
+**/etc** - Configuration files:
+- `/etc/fstab` - filesystem mounts
+- `/etc/passwd` - user accounts
+- `/etc/group` - group definitions
+
+**/mnt** - Temporary mount points:
+- Convention for manually mounted filesystems
+
+**/media** - Removable media:
+- Auto-mounted USB drives, CDs, etc.
+
+---
+
+## Quick Workflow Guide
+
+### Complete Workflow: Create, Format, Mount, Persist
+
+```bash
+# 1. Check available disks
+lsblk
+
+# 2. Create partitions
+sudo fdisk /dev/sdb
+# Commands: g (GPT), n (new partition x3), w (write)
+
+# 3. Format partitions
+sudo mkfs.ext4 /dev/sdb1
+sudo mkfs.ext4 /dev/sdb2
+sudo mkfs.ext4 /dev/sdb3
+
+# 4. Create mount points
+mkdir -p /home/student/{one,two,three}
+
+# 5. Mount temporarily (test)
+sudo mount /dev/sdb1 /home/student/one
+sudo mount /dev/sdb2 /home/student/two
+sudo mount /dev/sdb3 /home/student/three
+
+# 6. Verify
+df -hT
+
+# 7. Add to fstab for persistence
+sudo nano /etc/fstab
+# Add lines:
+# /dev/sdb1  /home/student/one    ext4  defaults  0  0
+# /dev/sdb2  /home/student/two    ext4  defaults  0  0
+# /dev/sdb3  /home/student/three  ext4  defaults  0  0
+
+# 8. Test fstab
+sudo umount /home/student/{one,two,three}
+sudo mount -a
+
+# 9. Verify persistence
+df -hT
+sudo reboot
+# After reboot:
+df -hT
+```
+
+### Troubleshooting Checklist
+
+**Partition not appearing**:
+- Did you write changes with `w` in fdisk?
+- Run `lsblk` to verify
+
+**Mount fails**:
+- Does mount point directory exist?
+- Is partition already mounted elsewhere?
+- Is filesystem formatted?
+- Check: `lsblk -f`
+
+**Can't unmount**:
+- Are you currently in the mount directory?
+- Is another process using it? Check: `lsof /mount/point`
+- Try: `cd ~ && sudo umount /mount/point`
+
+**Boot fails after editing fstab**:
+- Syntax error in fstab
+- Mount point doesn't exist
+- Boot to recovery mode and fix fstab
+
+**fsck errors**:
+- Did you unmount first?
+- For root filesystem, check runs at boot
+
+---
+
+## Practice Exercises
+
+### Exercise 1: Mount and File Persistence
+
+1. Mount a partition
+2. Create a file: `touch /mnt/testfile.txt`
+3. Unmount the partition
+4. Try to access: `ls /mnt/` (file gone!)
+5. Re-mount the partition
+6. Check: `ls /mnt/` (file back!)
+
+**Key lesson**: Data is on the partition, not the mount point.
+
+### Exercise 2: Change Filesystem Type
+
+1. Unmount partition
+2. Reformat with different filesystem:
+   ```bash
+   sudo mkfs.xfs /dev/sdb1
+   ```
+3. Re-mount
+4. Verify: `lsblk -f`
+
+### Exercise 3: Explore fdisk `t` Command
+
+1. In fdisk, create partition
+2. Use `l` to list partition types
+3. Use `t` to change partition type
+4. Common types:
+   - Linux filesystem
+   - Linux swap
+   - EFI System Partition
+
+---
+
+## Quick Reference Card
+
+### Must-Know Commands
+
+| Command | Purpose |
+|---------|---------|
+| `lsblk` | List block devices |
+| `lsblk -f` | List with filesystem info |
+| `df -hT` | Show mounted filesystems with sizes |
+| `sudo fdisk /dev/sdb` | Partition disk |
+| `sudo mkfs.ext4 /dev/sdb1` | Format as ext4 |
+| `sudo mount /dev/sdb1 /mnt` | Mount partition |
+| `sudo umount /mnt` | Unmount partition |
+| `sudo mount -a` | Mount all fstab entries |
+| `cat /etc/fstab` | View mount configuration |
+| `sudo nano /etc/fstab` | Edit mount configuration |
+| `sudo fsck /dev/sdb1` | Check filesystem |
+| `blkid` | Show UUIDs of all partitions |
+
+### fdisk Quick Commands
+
+| Key | Command |
+|-----|---------|
+| `m` | Show help |
+| `p` | Print partition table |
+| `g` | Create GPT partition table |
+| `o` | Create DOS partition table |
+| `n` | New partition |
+| `d` | Delete partition |
+| `t` | Change partition type |
+| `w` | Write changes and exit |
+| `q` | Quit without saving |
+
+### fstab Field Order
+
+```
+device  mount-point  fs-type  options  dump  pass
+```
+
+Example:
+```
+/dev/sdb1  /mnt/data  ext4  defaults  0  2
+```
+
+---
+
+## Important Warnings and Notes
+
+⚠️ **Data Loss**:
+- Creating/deleting partitions destroys data
+- Formatting erases all data on partition
+- Always backup before partitioning
+
+⚠️ **fstab Errors**:
+- Incorrect fstab can prevent boot
+- Test with `sudo mount -a` before rebooting
+- Keep recovery USB handy
+
+⚠️ **fsck Dangers**:
+- Never run fsck on mounted filesystem
+- Can corrupt data if run on mounted partition
+- Root filesystem checked at boot
+
+⚠️ **Permissions**:
+- Most partition operations require `sudo`
+- Mounted filesystems might have permission restrictions
+- Use `chmod` and `chown` to adjust
+
+---
+
+## Common Questions
+
+**Q: What's the difference between /dev/sda and /dev/vda?**
+A: `sda` = SATA/SCSI disk, `vda` = virtio virtual disk (used in KVM/QEMU)
+
+**Q: Can I resize partitions after creation?**
+A: Yes, but it's complex. Tools: `parted`, `gparted`, `resize2fs`
+
+**Q: What's a swap partition?**
+A: Virtual memory space on disk. Acts as overflow for RAM.
+
+**Q: Should I use /mnt or /media?**
+A: Convention: `/mnt` for manual mounts, `/media` for auto-mounted removable media
+
+**Q: What if I forget to unmount before removing USB drive?**
+A: Risk of data corruption. Always unmount first!
+
+**Q: How do I find which process is using a mount?**
+A: `lsof /mount/point` or `fuser -m /mount/point`
+
+**Q: Can I mount the same partition in multiple places?**
+A: Yes! Linux allows this (though it's unusual).
+
+---
+
+## Summary
+
+**Key Concepts**:
+1. Partitions are logical divisions of physical storage (ranges of sectors)
+2. Partition tables (DOS/MBR or GPT) are the "table of contents" for the disk
+3. Formatting creates a filesystem on a partition
+4. Mounting attaches a partition to a directory tree
+5. /etc/fstab makes mounts persistent across reboots
+
+**Essential Workflow**:
+1. View disks (`lsblk`)
+2. Create partition table (`fdisk` → `g` or `o`)
+3. Create partitions (`fdisk` → `n`)
+4. Format (`mkfs.ext4`)
+5. Create mount points (`mkdir`)
+6. Mount (`mount`)
+7. Add to fstab for persistence
+8. Test (`mount -a`)
+
+**Safety Rules**:
+- fdisk changes aren't saved until `w`
+- Always unmount before fsck
+- Test fstab with `mount -a` before rebooting
+- Backup before partitioning
+
+---
+
+*End of Study Notes*

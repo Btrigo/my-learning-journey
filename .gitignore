@@ -1,0 +1,138 @@
+# =============================================================================
+# SECURITY - NEVER COMMIT THESE (most important section)
+# =============================================================================
+# SSH keys and credentials
+*.pem
+*.key
+*.ppk
+id_rsa*
+
+# Environment files with secrets
+.env
+.env.local
+credentials.json
+secrets.yaml
+config.json
+**/secrets/
+
+# AWS credentials
+.aws/credentials
+.aws/config
+
+# Any file with "password" or "secret" in name
+*password*
+*secret*
+*credential*
+
+
+# =============================================================================
+# PERSONAL FILES - Your private notes and scratchpad
+# =============================================================================
+# Scratchpad files (you have scratchpad-12-2-2025.md)
+scratchpad*.md
+**/personal/
+**/private-notes/
+
+# Personal to-do lists that I don't want public
+to-do-list.md  
+
+# Any files marked as drafts
+*draft*.md
+*WIP*.md
+
+
+# =============================================================================
+# OPERATING SYSTEM FILES - Junk your OS creates
+# =============================================================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+
+
+# =============================================================================
+# EDITOR/IDE FILES - Config files for your code editor
+# =============================================================================
+# VS Code
+.vscode/
+*.code-workspace
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# JetBrains (PyCharm, IntelliJ)
+.idea/
+*.iml
+
+
+# =============================================================================
+# PYTHON - when writing Python scripts
+# =============================================================================
+# Byte-compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# Distribution/packaging
+build/
+dist/
+*.egg-info/
+
+
+# =============================================================================
+# TEMPORARY FILES - Stuff that shouldn't be tracked
+# =============================================================================
+*.tmp
+*.temp
+*.log
+*.bak
+*.swp
+*.swo
+
+# Temporary directories
+tmp/
+temp/
+cache/
+
+# Log files
+logs/
+*.log
+
+
+# =============================================================================
+# EXAMPLE/TEST FILES - Files you're just testing with
+# =============================================================================
+# Test data
+test_data/
+sample_data/
+**/tests/tmp/
+
+# Example outputs
+example_output/
+**/examples/*.log
+**/examples/*.tmp
