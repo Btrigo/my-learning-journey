@@ -1,3 +1,3 @@
-# Projects Coming soon!!
+# This repository houses all my projects
 
-## Please feel free to browse the rest of this repo. You may find a hidden gem in the form of NEW KNOWLEDGE!!
+## Please feel free to browse this folder and others. You may find a hidden gem in the form of NEW KNOWLEDGE!!
