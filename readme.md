@@ -67,7 +67,7 @@ Do. The only way to fail is to give up.
 
 ## 📁 Repository Structure
 
-### 📅 **[daily-logs/](daily-logs/)** - My daily study journal. 
+### 📅 **[daily-logs/](daily_logs/)** - My daily study journal. 
 
 
 ### 📝 **[personal_notes/](personal_notes/)** - Organized technical notes across core domains
@@ -98,7 +98,7 @@ Do. The only way to fail is to give up.
 
 ## If you're reading this: 
 
-*Thanks for following along. Star this repo and check back regularly. As I grow, this repository will grow with me.*
+*Thanks for following along. Star this repo and check back regularly. As I grow, this repository will too.*
 ---
 
 
