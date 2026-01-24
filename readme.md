@@ -1,82 +1,108 @@
-# **Brando’s Learning Journey**
+# Brando's Learning Journey
+**Cloud Security Engineer in Training | Infrastructure & Security Professional**
 
-*A public roadmap of my growth in systems, networking, cloud, and cybersecurity.*
+> *"Life happens for us, not to us. Every challenge is a chance to learn, adapt, and improve."*
 
-This repository is where I document what I’m learning as I work through the core areas of IT. It’s my place to take notes, build labs, track progress, hold myself accountable, and showcase the skills im developing. 
+This repository is my public roadmap—a transparent documentation of my path from data center operations to cloud engineering. It's where I centralize my notes, hands-on labs, daily progress, and projects as I build the expertise required to implement and secure cloud infrastructure at scale.
 
-My goal is to work toward a deeper career in networking, cloud, and IT engineering, and this repository reflects the daily work that supports this path. Each file and project here is part of my commitment to improving and becoming a better version of myself each day.
-
----
-
-## **What I’m Studying & Actively Building Skills In**
-
-* **Operating systems:** Linux & Windows administration
-* **Networking:** foundational protocols, routing, switching, DNS, DHCP, VLANs
-* **Cloud:** AWS fundamentals (IAM, VPC, EC2, S3, security)
-* **Security:** core concepts, hardening, labs, and threat fundamentals
-* **Automation:** Python scripting for IT workflows
-* **Tooling:** Docker, Git, containerization, documentation
-* **Practical experience:** home labs, TryHackMe, real projects, consistent practice
+**Why public?** Accountability. Transparency. Proof of consistent effort.
 
 ---
 
-## **Goals**
+## 🎯 Mission
 
-* Become an expert in troubleshooting hardware, software, OS internals, and networking
-* Build cloud skills (AWS, VPCs, IAM, IAM roles, EC2, networking)
-* Deploy a full cloud environment under a domain I own
-* Build a public portfolio showcasing real-world practice
-* Develop daily discipline and track my growth transparently
-* Master networking and deeply understand how communication happens across systems
-* Become a network engineer or similar. 
+Transform from infrastructure technician to **Cloud Security Engineer** by mastering AWS security, infrastructure automation, and defensive security practices. This isn't just about certifications—it's about building real, production-grade skills through consistent daily work and hands-on practice.
+
+**Target Role:** Cloud Security Engineer specializing in AWS infrastructure security, IAM policy design, security automation, and DevSecOps workflows.
 
 ---
 
-## **Repository Structure**
+### Primary Track: AWS Cloud Security
+- **AWS Certified Cloud Practitioner (CLF-C02)** - Target: Early March 2026
+- **AWS Solutions Architect Associate (SAA-C03)** preparation — Target: Early May 2026
+- **AWS Security Specialty (SCS-C02)** — Target: August 2026
+- Building hands-on AWS labs: VPC design, IAM policies, security groups, CloudTrail monitoring
+- Infrastructure as Code with Terraform and CloudFormation
 
-This repo grows with me. Each folder houses material that I will be studying and working with.
-
-### **Daily Logs**
-
-📁 `/daily-logs`
-Daily summaries of what I studied, built, or experimented with.
-
-### **Notes**
-
-📁 `/notes`
-Structured notes covering things things that I enjoy.
-
-### **TryHackMe**
-
-📁 `/tryhackme`
-Anything tryhackme related. Write-ups, walk-throughs, notes.
-
-### **Projects**
-
-📁 `/projects`
-Hands-on builds, scripts, home-labs, and any projects im currently working on. 
-
-### **Templates**
-
-📁 `/templates`
-All templates will be found here.
-
-### **Scripts**
-
-📁 `/scripts` 
-Any scripts used for automation will be found here. 
+### Active Skills Development
+- **Linux System Administration** — Daily practice with system services, cron jobs, log analysis
+- **Networking Fundamentals** — Subnetting, CIDR, routing, VLANs, network security
+- **Security Operations** — TryHackMe labs, CTF challenges, vulnerability analysis
+- **Scripting & Automation** — Bash scripting for system automation and workflow optimization
+- **Web Development** — Building production WordPress sites (currently: brandontrigo.com portfolio)
 
 ---
 
-## **The Mindset**
+## 🛠️ Technical Background
+
+**Security+ Certified** | CompTIA Security+ (SY0-601)
+
+### Professional Experience
+- **H5 Data Centers** — Remote Hands Technician  
+  Infrastructure monitoring, SLA-driven ticket resolution, customer environment support, physical security operations
+
+- **SSRD Cybersecurity Internship**  
+  CTF challenge development with Docker, Git version control, realistic vulnerability simulations for security training
+
+- **Cross-Platform Systems Engineering**  
+  Windows/Linux administration, Active Directory, Group Policy, system imaging, network troubleshooting (OSI Layers 1-3)
+
+  ### Completed:
+- ✅ **CompTIA Security+** (SY0-601)
+- ✅ **CompTIA A+** (Core 1 & 2)
+- ✅ Cybersecurity Bootcamp — Adelphi University / StackRoute
+
+### In Progress
+- 🔄 **AWS Certified Cloud practitioner** (CLF-C02) - Target: Early March 2026
+- 🔄 **AWS Solutions Architect Associate** (SAA-C03) - Target: Early May 2026
+- 🔄 **TryHackMe** - Active daily practice
+- 🔄 **Linux System Administration** - Daily hands-on work
+- 🔄 **Website development** - Personal brand website in progress
+
+
+---
+
+## 💡 Philosophy & Approach
 
 Do. The only way to fail is to give up. 
 
 ---
 
-## **Follow the Journey**
+## 📁 Repository Structure
 
-This repository will grow as I grow.
+### 📅 **[daily-logs/](daily-logs/)** - My daily study journal. 
 
-If you’re reading this:
-**Thanks for following along.**
+
+### 📝 **[personal_notes/](personal_notes/)** - Organized technical notes across core domains
+
+
+### 🏗️ **[projects/](projects/)** - Hands-on builds and real-world application
+
+
+### 🎓 **[tryhackme/](tryhackme/)** - TryHackMe room completions, write-ups, and notes
+
+
+### 🔧 **[scripts/](scripts/)** - Automation and utility scripts
+
+
+### 📋 **[templates/](templates/)** - Reusable templates 
+
+---
+
+## 🔗 Connect & Portfolio
+
+- **Portfolio:** [brandontrigo.com](https://brandontrigo.com)
+- **GitHub:** [github.com/Btrigo](https://github.com/Btrigo)
+- **LinkedIn:** [Connect with me](https://linkedin.com/in/brandonjtrigo31)
+- **Email:** Main: Brandotrigo5@gmail.com Secondary: Brandon.trigo@stackroutecareers.com 
+
+---
+
+
+## If you're reading this: 
+
+*Thanks for following along. Star this repo and check back regularly. As I grow, this repository will grow with me.*
+---
+
+
+**Last Updated:** January 24, 2026
