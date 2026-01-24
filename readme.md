@@ -35,8 +35,6 @@ Transform from infrastructure technician to **Cloud Security Engineer** by maste
 
 ## 🛠️ Technical Background
 
-**Security+ Certified** | CompTIA Security+ (SY0-601)
-
 ### Professional Experience
 - **H5 Data Centers** — Remote Hands Technician  
   Infrastructure monitoring, SLA-driven ticket resolution, customer environment support, physical security operations
@@ -49,7 +47,6 @@ Transform from infrastructure technician to **Cloud Security Engineer** by maste
 
   ### Completed:
 - ✅ **CompTIA Security+** (SY0-601)
-- ✅ **CompTIA A+** (Core 1 & 2)
 - ✅ Cybersecurity Bootcamp — Adelphi University / StackRoute
 
 ### In Progress
