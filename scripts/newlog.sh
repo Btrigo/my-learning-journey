@@ -8,7 +8,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TEMPLATE="$SCRIPT_DIR/../templates/daily-log-template.md"
 
 # create in daily-logs directory
-OUTPUT_DIR="$SCRIPT_DIR/../daily-logs"
+OUTPUT_DIR="$SCRIPT_DIR/../daily_logs"
 mkdir -p "$OUTPUT_DIR"  # Creates directory if it doesn't exist
 
 # copy template to daily-logs directory
