@@ -17,19 +17,14 @@ Transform from infrastructure technician to **Cloud Security Engineer** by maste
 
 ---
 
-### Primary Track: AWS Cloud Security
-- **AWS Certified Cloud Practitioner (CLF-C02)** - Target: Early March 2026
-- **AWS Solutions Architect Associate (SAA-C03)** preparation — Target: Early May 2026
-- **AWS Security Specialty (SCS-C02)** — Target: August 2026
-- Building hands-on AWS labs: VPC design, IAM policies, security groups, CloudTrail monitoring
-- Infrastructure as Code with Terraform and CloudFormation
-
 ### Active Skills Development
-- **Linux System Administration** — Daily practice with system services, cron jobs, log analysis
-- **Networking Fundamentals** — Subnetting, CIDR, routing, VLANs, network security
+- **AWS Cloud Architecture** — Solutions design, cost optimization, high availability patterns
+- **Linux System Administration** — Daily pr actice with system services, cron jobs, log analysis
+- **Networking Fundamentals** — Subnetting, CIDR, routing, VLANs, VPCs, security groups
 - **Security Operations** — TryHackMe labs, CTF challenges, vulnerability analysis
-- **Scripting & Automation** — Bash scripting for system automation and workflow optimization
-- **Web Development** — Building production WordPress sites (currently: brandontrigo.com portfolio)
+- **Scripting & Automation** — Python and Bash scripting for system automation and workflow optimization
+- **Infrastructure as Code** — Learning Terraform and CloudFormation for automated deployment
+- **Web Development** — Building and deploying web applications and portfolio sites
 
 ---
 
@@ -48,10 +43,12 @@ Transform from infrastructure technician to **Cloud Security Engineer** by maste
   ### Completed:
 - ✅ **CompTIA Security+** (SY0-601)
 - ✅ Cybersecurity Bootcamp — Adelphi University / StackRoute
+- ✅ Associate's Degree - NCC - 4.0 GPA - Summa Cum Laude 
 
 ### In Progress
 - 🔄 **AWS Certified Cloud practitioner** (CLF-C02) - Target: Early March 2026
 - 🔄 **AWS Solutions Architect Associate** (SAA-C03) - Target: Early May 2026
+- 🔄 **AWS Security Specialty (SCS-C02)** — Target: August 2026
 - 🔄 **TryHackMe** - Active daily practice
 - 🔄 **Linux System Administration** - Daily hands-on work
 - 🔄 **Website development** - Personal brand website in progress
@@ -102,4 +99,4 @@ Do. The only way to fail is to give up.
 ---
 
 
-**Last Updated:** January 24, 2026
+**Last Updated:** January 25, 2026
