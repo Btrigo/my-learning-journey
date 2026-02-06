@@ -1185,6 +1185,8 @@ Provider A ←→ Provider B ←→ Provider C
 2. Topic name: Descriptive name
 3. Email: Your email
 4. Click "Create topic"
+5. Create a subscription with your email as an endpoint
+   a. *note* your "protocol" does not have to be an email, there are many options. e.g. SMS, HTTP/S, AWS Lambda, Amazon SQS, etc. 
 
 **Status shows**: "Pending confirmation"
 
