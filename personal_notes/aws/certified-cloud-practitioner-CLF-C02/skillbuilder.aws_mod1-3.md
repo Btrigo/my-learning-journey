@@ -107,6 +107,198 @@ Distributes incoming traffic across multiple instances.
 - Integrates with Auto Scaling
 - Works across multiple Availability Zones
 
+---
+
+## Messaging and Queuing
+
+Modern cloud applications often consist of many independent services that must communicate with each other. AWS provides messaging services that allow these components to communicate in a **reliable and scalable way**.
+
+These services help prevent failures by **decoupling application components**.
+
+Key services:
+
+- Amazon SQS (Simple Queue Service)
+- Amazon SNS (Simple Notification Service)
+- Amazon EventBridge
+
+---
+
+### Tightly Coupled vs Loosely Coupled Architectures
+
+#### Tightly Coupled
+
+In a tightly coupled architecture, components communicate **directly with each other**.
+
+Example:
+
+Application A → Application B
+
+If **Application B fails**, Application A may also fail because it cannot deliver messages.
+
+Problems with tightly coupled systems:
+
+- Cascading failures
+- Poor scalability
+- Difficult maintenance
+- Reduced fault tolerance
+
+---
+
+#### Loosely Coupled
+
+In a loosely coupled architecture, components communicate through an **intermediary service** such as a queue or event bus.
+
+Example:
+
+Application A → Messaging Service → Application B
+
+Benefits:
+
+- Components operate independently
+- Failures are isolated
+- Systems scale more easily
+- Services can be updated or replaced without breaking other components
+
+AWS messaging services are designed to **enable loosely coupled architectures**.
+
+---
+
+## Amazon SQS (Simple Queue Service)
+
+Amazon SQS is a **fully managed message queue service** used to send, store, and receive messages between software components.
+
+Messages are placed into a **queue** and remain there until they are processed by another service.
+
+### Key Concepts
+
+- **Message** — data sent between services
+- **Payload** — the content inside the message
+- **Queue** — the buffer where messages wait until processed
+
+### How It Works
+
+Producer → **SQS Queue** → Consumer
+
+Example:
+
+Application A sends messages to the queue.  
+Application B processes the messages when it becomes available.
+
+If the consumer is unavailable, **messages remain in the queue until they are processed**.
+
+### Benefits
+
+- Decouples application components
+- Prevents message loss
+- Automatically scales
+- Highly durable and reliable
+
+### Real-world analogy
+
+Coffee shop example:
+
+Cashier → **Order Board (Queue)** → Barista
+
+Orders wait on the board until the barista is ready.
+
+---
+
+## Amazon SNS (Simple Notification Service)
+
+Amazon SNS is a **publish–subscribe (pub/sub) messaging service** used to send notifications to multiple subscribers simultaneously.
+
+Instead of storing messages in a queue, SNS **pushes messages immediately to subscribers**.
+
+### Architecture
+
+Publisher → **SNS Topic** → Subscribers
+
+### Possible Subscribers
+
+- Lambda functions
+- EC2 instances
+- SQS queues
+- HTTP endpoints
+- Email
+- SMS
+- Mobile push notifications
+
+### Example Use Case
+
+A company wants to notify customers about:
+
+- New products
+- Special offers
+- Upcoming events
+
+Using SNS, the company can create **topics** such as:
+
+- `new-products`
+- `special-offers`
+- `events`
+
+Customers subscribe to the topics they are interested in and receive **targeted notifications**.
+
+### Benefits
+
+- Real-time notifications
+- Audience segmentation
+- Massive scalability
+- Supports multiple delivery protocols
+
+---
+
+## Amazon EventBridge
+
+Amazon EventBridge is a **serverless event bus service** used to connect AWS services, applications, and SaaS platforms through events.
+
+EventBridge receives events and **routes them to target services** based on rules.
+
+### Event Flow
+
+Event Source → **EventBridge Event Bus** → Target Service
+
+### Common Event Sources
+
+- AWS services
+- Custom applications
+- Third-party SaaS services
+
+### Possible Targets
+
+- AWS Lambda
+- Amazon SQS
+- Amazon SNS
+- AWS Step Functions
+- Amazon Kinesis
+
+### Capabilities
+
+- Event filtering
+- Event routing
+- Event transformation
+- Serverless integration between services
+
+EventBridge enables **event-driven architectures**, where applications react automatically to events occurring within the system.
+
+---
+
+## Quick Comparison
+
+| Service | Messaging Model | Behavior |
+|------|------|------|
+| **SQS** | Queue | Stores messages until processed |
+| **SNS** | Publish / Subscribe | Pushes messages to subscribers |
+| **EventBridge** | Event Bus | Routes events between services |
+
+Quick mental model:
+
+SQS → message buffer  
+SNS → broadcast notification system  
+EventBridge → event router
+
+---
+
 ### AWS Lambda
 
 Fully serverless, event-driven compute.
