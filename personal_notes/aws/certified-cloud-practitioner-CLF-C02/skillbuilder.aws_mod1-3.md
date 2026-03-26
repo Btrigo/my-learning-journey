@@ -313,6 +313,33 @@ Fully serverless, event-driven compute.
 
 **Best for:** Event-based processing, backend APIs, automation, data transformations.
 
+## AWS Step Functions
+
+Serverless **orchestration** service used to coordinate multiple AWS services 
+into sequential or parallel workflows using a visual state machine.
+
+- Manages state between each step automatically
+- Handles retries and error handling
+- Passes data from one step to the next
+- Commonly used to coordinate Lambda functions, SNS, SQS, ECS, and more
+
+### Example Workflow
+User uploads image → Lambda resizes it → S3 stores it → SNS notifies user → DynamoDB logs it
+
+### Key Distinction
+
+| Service | Role | Think of it as |
+|---|---|---|
+| Step Functions | Orchestrates workflows | The conductor |
+| Lambda | Executes code | The musician |
+| SQS | Queues messages | The waiting room |
+| AWS Batch | Runs batch jobs | The overnight processor |
+
+### Exam Trigger
+- "Coordinate multiple services" + "serverless workflow" → **Step Functions**
+- Step Functions uses Lambda as steps — Lambda is not the orchestrator itself
+
+
 ---
 
 ## Module 3 – Exploring Compute Services
