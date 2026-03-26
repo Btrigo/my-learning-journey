@@ -97,11 +97,12 @@ The three primary cost drivers across all AWS services:
 
 | Feature | Basic | Developer | Business | Enterprise On-Ramp | Enterprise |
 |---|---|---|---|---|---|
-| **Cost** | Free | Paid | Paid | Paid | Paid (highest) |
+| **Cost** | Free | $29/mo min | $100/mo min | $5,500/mo min | $15,000/mo min |
 | **Best for** | All customers | Experimenting/testing | Production workloads | Production + business-critical | Business/mission-critical |
 | **Contact method** | Docs/forums only | Email only | Phone, email, chat | Phone, email, chat | Phone, email, chat |
 | **General guidance** | — | < 24 hrs | < 24 hrs | < 24 hrs | < 24 hrs |
-| **System impaired** | — | < 12 hrs | < 4 hrs | < 4 hrs | < 4 hrs |
+| **System impaired** | — | < 12 hrs | < 12 hrs | < 12 hrs | < 12 hrs |
+| **Production system impaired** | — | — | < 4 hrs | < 4 hrs | < 4 hrs |
 | **Production system down** | — | — | < 1 hr | < 1 hr | < 1 hr |
 | **Business/mission-critical down** | — | — | — | < 30 min | **< 15 min** |
 | **Trusted Advisor** | 7 core checks | 7 core checks | Full suite | Full suite | Full suite + prioritized recommendations |
