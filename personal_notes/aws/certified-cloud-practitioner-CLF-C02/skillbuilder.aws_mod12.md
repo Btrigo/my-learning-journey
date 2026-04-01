@@ -42,17 +42,17 @@ Created by **AWS Professional Services**. Organizes migration guidance into **6 
 
 | Perspective | Focus | Key Roles |
 |---|---|---|
-| **Business** | Aligns IT with business goals; ensures IT investments link to key business results | Business managers, Finance managers, Budget owners, Strategy stakeholders |
+| **Business** | Aligns IT with business goals; ensures IT investments link to key business results | CEO, CFO, COO, CIO, CMO, CPO, CTO |
 | **People** | Organization-wide change management, skill gap identification | HR, Staffing, People managers |
-| **Governance** | Aligns IT strategy with business strategy; maximizes value, minimizes risk | CIO, Program managers, Enterprise architects, Business analysts, Portfolio managers |
+| **Governance** | Aligns IT strategy with business strategy; maximizes value, minimizes risk | CIO, CTO, CFO, CDO (Chief Data Officer), CRO (Chief Risk Officer), Program managers, Enterprise architects, Business analysts, Portfolio managers |
 
 ### Technical Capabilities (Tech Side)
 
 | Perspective | Focus | Key Roles |
 |---|---|---|
-| **Platform** | Implements new solutions, migrates on-prem workloads using architectural models | CTO, IT managers, Solutions architects |
-| **Security** | Meets security objectives: visibility, auditability, control, agility | CISO, IT security managers, IT security analysts |
-| **Operations** | Enables, runs, operates, and recovers IT workloads to agreed-upon levels | IT operations managers, IT support managers |
+| **Platform** | Implements new solutions, migrates on-prem workloads using architectural models | CTO, IT managers, Solutions architects, Engineers |
+| **Security** | Meets security objectives: confidentiality, integrity, availability of data and cloud workloads | CISO, CCO (Chief Compliance Officer), Internal audit leaders, IT security architects and engineers |
+| **Operations** | Enables, runs, operates, and recovers IT workloads to agreed-upon levels | IT operations managers, IT support managers, Site reliability engineers |
 
 ### CAF Process
 Each perspective uncovers **gaps** → gaps become **inputs** → inputs create the **AWS CAF Action Plan** → plan guides change management.
@@ -73,8 +73,8 @@ Each perspective uncovers **gaps** → gaps become **inputs** → inputs create 
 
 | # | Strategy | Nickname | Key Detail |
 |---|---|---|---|
-| 1 | **Relocate** | — | Workloads already running as VMs/containers on-prem → move hosting location to cloud |
-| 2 | **Rehost** | Lift and Shift | Move as-is, no changes; up to 30% cost savings; used in large legacy migrations for speed/scale |
+| 1 | **Relocate** | Hypervisor-level lift and shift | Transfers servers from an on-prem platform to a **cloud version of that same platform** (e.g., VMware SDDC on-prem → VMware Cloud on AWS). Requires no new hardware, no code changes, no architecture changes. |
+| 2 | **Rehost** | Lift and Shift | Move as-is, no changes to the application. Source can be **physical, virtual, or another cloud**. Up to 30% cost savings; used in large legacy migrations for speed/scale. |
 | 3 | **Replatform** | Lift, Tinker & Shift | Minor cloud optimizations; NO core architecture changes (e.g., MySQL → RDS/Aurora) |
 | 4 | **Refactor** | Rearchitect | Write new code; reimagine using cloud-native features; highest upfront cost; driven by need for features/performance not achievable on-prem |
 | 5 | **Repurchase** | Drop and Shop | Move from traditional license to SaaS model (e.g., CRM → Salesforce); OR replace app with cloud-based version from AWS Marketplace |
@@ -82,8 +82,8 @@ Each perspective uncovers **gaps** → gaps become **inputs** → inputs create 
 | 7 | **Retire** | — | Remove apps no longer needed; 10%+ of enterprise workloads are typically unused |
 
 ### Key Distinctions
-- **Rehost vs. Relocate:** Rehost converts servers to VMs. Relocate is for workloads *already* running as VMs/containers.
-- **Replatform vs. Refactor:** Replatform = no code changes. Refactor = new code written.
+- **Rehost vs. Relocate:** Rehost moves **anything** (physical, virtual, or cloud) as-is to AWS. Relocate is specifically for moving a platform to its **cloud equivalent** (e.g., VMware SDDC → VMware Cloud on AWS).
+- **Replatform vs. Refactor:** Replatform = same code, minor optimizations. Refactor = new code written.
 - **Retain vs. Retire:** Retain = not yet. Retire = shut it down now.
 - **"Moving to a different product"** = **Repurchasing**
 
@@ -195,6 +195,7 @@ Each perspective uncovers **gaps** → gaps become **inputs** → inputs create 
 ## 9. Key Exam Traps
 
 - **People vs. Business (CAF):** "Change management strategy" or "organizational readiness" = **People**. "IT aligns with business goals/ROI" = **Business**.
+- **Rehost vs. Relocate:** Rehost = move anything (physical, virtual, or cloud) as-is. Relocate = move a platform to its cloud equivalent (e.g., VMware → VMware Cloud on AWS).
 - **Replatform vs. Refactor:** Replatform = same code, minor optimizations. Refactor = new code written.
 - **DMS vs. SCT:** DMS moves data. SCT converts schema. Heterogeneous migrations need **both** (SCT first).
 - **DataSync vs. Transfer Family:** DataSync = automation and acceleration. Transfer Family = protocol support (SFTP/FTP/FTPS).
