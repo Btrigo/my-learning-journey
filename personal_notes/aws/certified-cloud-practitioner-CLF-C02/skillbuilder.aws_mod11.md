@@ -104,10 +104,11 @@ The three primary cost drivers across all AWS services:
 | **System impaired** | — | < 12 hrs | < 12 hrs | < 12 hrs | < 12 hrs |
 | **Production system impaired** | — | — | < 4 hrs | < 4 hrs | < 4 hrs |
 | **Production system down** | — | — | < 1 hr | < 1 hr | < 1 hr |
-| **Business/mission-critical down** | — | — | — | < 30 min | **< 15 min** |
+| **Business/mission-critical down** | — | — | -- | < 30 min | **< 15 min** |
+| **Solutions Architect** | -- | -- | Yes | Yes | Yes | 
 | **Trusted Advisor** | 7 core checks | 7 core checks | Full suite | Full suite | Full suite + prioritized recommendations |
 | **TAM** | ❌ | ❌ | ❌ | Pool of TAMs | **Designated TAM** |
-| **Infrastructure Event Mgmt** | ❌ | ❌ | Extra fee | Included | Included |
+| **Infrastructure Event Mgmt** | ❌ | ❌ | Extra fee | Included (1 event per year) | Included (unlimited) |
 
 ### Key Plan Facts
 - Every plan is a **superset** of the one below — you never lose features going up
