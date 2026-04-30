@@ -1,102 +1,90 @@
 # Brando's Learning Journey
-**Cloud Security Engineer in Training | Infrastructure & Security Professional**
+**Cloud Infrastructure Engineer in Training | Networking & Security Foundation**
 
-> *"Life happens for us, not to us. Every challenge is a chance to learn, adapt, and improve."*
-
-This repository is my public roadmap—a transparent documentation of my path from data center operations to cloud engineering. It's where I centralize my notes, hands-on labs, daily progress, and projects as I build the expertise required to implement and secure cloud infrastructure at scale.
-
-**Why public?** Accountability. Transparency. Proof of consistent effort.
+> ***"Life happens for us, not to us. Every challenge is a chance to learn, adapt, and improve."***
 
 ---
 
-## 🎯 Mission
+## Who I Am
 
-Transform from infrastructure technician to **Cloud Security Engineer** by mastering AWS security, infrastructure automation, and defensive security practices. This isn't just about certifications—it's about building real, production-grade skills through consistent daily work and hands-on practice.
+I'm Brandon Trigo — someone who genuinely loves how infrastructure works.
 
-**Target Role:** Cloud Security Engineer specializing in AWS infrastructure security, IAM policy design, security automation, and DevSecOps workflows.
+Not just at the surface level. I mean the fact that there are fiber cables running across the floor of the ocean carrying electrical signals that get translated into readable information in milliseconds. The fact that when you load a webpage, you're probably not even talking to the origin server — you're hitting a CDN edge node somewhere close to you. The fact that you can define an entire network topology in code and a cloud provider will go build it for you.
+
+That stuff fascinates me. It always has.
+
+My background is physical — I've racked servers, terminated fiber, managed structured cabling, and handled remote hands operations in a live colocation environment. I understand infrastructure from the ground up, literally. Now I'm taking that foundation and building upward into cloud architecture, network engineering, and security.
+
+This repository is my public proof of work. Every day I'm learning something. Most of it ends up here.
 
 ---
 
-### Active Skills Development
-- **AWS Cloud Architecture** — Solutions design, cost optimization, high availability patterns
-- **Linux System Administration** — Daily pr actice with system services, cron jobs, log analysis
-- **Networking Fundamentals** — Subnetting, CIDR, routing, VLANs, VPCs, security groups
-- **Security Operations** — TryHackMe labs, CTF challenges, vulnerability analysis
-- **Scripting & Automation** — Python and Bash scripting for system automation and workflow optimization
-- **Infrastructure as Code** — Learning Terraform and CloudFormation for automated deployment
-- **Web Development** — Building and deploying web applications and portfolio sites
+## 🎯 Target Role
+
+**Cloud Infrastructure Engineer** — with a networking focus and security foundation.
+
+I want to build and manage cloud environments that are well-architected, properly networked, and defensible. Not just keeping the lights on — understanding *why* the lights are on and making sure they stay that way.
+
+---
+
+## 🏗️ Where I'm At
+
+### Certifications
+- ✅ **CompTIA Security+** (SY0-701) 
+- ✅ **AWS Certified Cloud Practitioner** (CLF-C02) — April 2026
+- ✅ Cybersecurity Bootcamp — Adelphi University / StackRoute
+- ✅ Associate's Degree — Nassau Community College | 4.0 GPA | Summa Cum Laude
+
+### In Progress
+- 🔄 **AWS Solutions Architect Associate** (SAA-C03)
+- 🔄 **Networking fundamentals** — GNS3 labs, hands-on routing and switching
+- 🔄 **Infrastructure as Code** — CloudFormation, working toward Terraform
+- 🔄 **TryHackMe** — Active practice, penetration testing and network analysis
 
 ---
 
 ## 🛠️ Technical Background
 
-### Professional Experience
-- **H5 Data Centers** — Remote Hands Technician  
-  Infrastructure monitoring, SLA-driven ticket resolution, customer environment support, physical security operations
+**H5 Data Centers — Remote Hands Technician**
+Real production environment. SLA-driven ticket resolution, hardware installs, structured cabling, physical security, SolarWinds monitoring. This is where I learned that infrastructure is unforgiving and documentation matters.
 
-- **SSRD Cybersecurity Internship**  
-  CTF challenge development with Docker, Git version control, realistic vulnerability simulations for security training
+**SSRD Cybersecurity Internship — CTF Developer**
+Built 12+ capture the flag challenges targeting real-world vulnerabilities — XSS, SQL injection, RCE, privilege escalation. Deployed via Docker. Used Git for version control throughout.
 
-- **Cross-Platform Systems Engineering**  
-  Windows/Linux administration, Active Directory, Group Policy, system imaging, network troubleshooting (OSI Layers 1-3)
-
-  ### Completed:
-- ✅ **CompTIA Security+** (SY0-601)
-- ✅ Cybersecurity Bootcamp — Adelphi University / StackRoute
-- ✅ Associate's Degree - NCC - 4.0 GPA - Summa Cum Laude 
-
-### In Progress
-- 🔄 **AWS Certified Cloud practitioner** (CLF-C02) - Target: Early March 2026
-- 🔄 **AWS Solutions Architect Associate** (SAA-C03) - Target: Early May 2026
-- 🔄 **AWS Security Specialty (SCS-C02)** — Target: August 2026
-- 🔄 **TryHackMe** - Active daily practice
-- 🔄 **Linux System Administration** - Daily hands-on work
-- 🔄 **Website development** - Personal brand website in progress
-
+**Cross-Platform Administration**
+Windows Server, Linux, Active Directory, Group Policy, network troubleshooting across OSI Layers 1–3. Comfortable in both environments.
 
 ---
 
 ## 💡 Philosophy & Approach
 
-Do. The only way to fail is to give up. 
+> ***"Grit (n.) — the drive, stamina, and fortitude to push through any challenge or obstacle until success is achieved."***
+
 
 ---
 
-## 📁 Repository Structure
+## 📁 What's In This Repo
 
-### 📅 **[daily-logs/](daily_logs/)** - My daily study journal. 
+**[daily-logs/](daily_logs/)** — My daily study journal. Raw and consistent.
 
+**[personal_notes/](personal_notes/)** — Technical notes organized by domain. AWS, networking, security, Linux.
 
-### 📝 **[personal_notes/](personal_notes/)** - Organized technical notes across core domains
+**[projects/](projects/)** — Hands-on builds. Real infrastructure, documented end to end.
 
+**[tryhackme/](tryhackme/)** — Room completions and write-ups.
 
-### 🏗️ **[projects/](projects/)** - Hands-on builds and real-world application
+**[scripts/](scripts/)** — Automation and utility scripts in Python and Bash.
 
-
-### 🎓 **[tryhackme/](tryhackme/)** - TryHackMe room completions, write-ups, and notes
-
-
-### 🔧 **[scripts/](scripts/)** - Automation and utility scripts
-
-
-### 📋 **[templates/](templates/)** - Reusable templates 
+**[templates/](templates/)** — Reusable formats I use regularly.
 
 ---
 
-## 🔗 Connect & Portfolio
+## 🔗 Find Me
 
 - **Portfolio:** [brandontrigo.com](https://brandontrigo.com)
 - **GitHub:** [github.com/Btrigo](https://github.com/Btrigo)
-- **LinkedIn:** [Connect with me](https://linkedin.com/in/brandonjtrigo31)
-- **Email:** Main: Brandotrigo5@gmail.com Secondary: Brandon.trigo@stackroutecareers.com 
+- **LinkedIn:** [linkedin.com/in/brandonjtrigo31](https://linkedin.com/in/brandonjtrigo31)
 
 ---
 
-
-## If you're reading this: 
-
-*Thanks for following along. Star this repo and check back regularly. As I grow, this repository will too.*
----
-
-
-**Last Updated:** January 25, 2026
+*Last updated: April 2026*
