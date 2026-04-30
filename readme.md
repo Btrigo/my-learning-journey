@@ -30,7 +30,7 @@ I want to build and manage cloud environments that are well-architected, properl
 ## 🏗️ Where I'm At
 
 ### Certifications
-- ✅ **CompTIA Security+** (SY0-701) 
+- ✅ **CompTIA Security+** (SY0-701) - August 2025
 - ✅ **AWS Certified Cloud Practitioner** (CLF-C02) — April 2026
 - ✅ Cybersecurity Bootcamp — Adelphi University / StackRoute
 - ✅ Associate's Degree — Nassau Community College | 4.0 GPA | Summa Cum Laude
