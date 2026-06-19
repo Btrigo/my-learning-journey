@@ -1,5 +1,5 @@
 # Brando's Learning Journey
-**Cloud Infrastructure Engineer in Training | Networking & Security Foundation**
+**Cloud Engineer in Training | Networking & Security Foundation**
 
 > ***"Life happens for us, not to us. Every challenge is a chance to learn, adapt, and improve."***
 
@@ -21,7 +21,7 @@ This repository is my public proof of work. Every day I'm learning something. Mo
 
 ## 🎯 Target Role
 
-**Cloud Infrastructure Engineer** — with a networking focus and security foundation.
+**Cloud Engineer** — with a networking focus and security foundation.
 
 I want to build and manage cloud environments that are well-architected, properly networked, and defensible. Not just keeping the lights on — understanding *why* the lights are on and making sure they stay that way.
 
@@ -35,13 +35,30 @@ I want to build and manage cloud environments that are well-architected, properl
 - ✅ Cybersecurity Bootcamp — Adelphi University / StackRoute
 - ✅ Associate's Degree — Nassau Community College | 4.0 GPA | Summa Cum Laude
 
-### In Progress
+### Active focus
 - 🔄 **AWS Solutions Architect Associate** (SAA-C03)
-- 🔄 **Networking fundamentals** — GNS3 labs, hands-on routing and switching
-- 🔄 **Infrastructure as Code** — CloudFormation, working toward Terraform
-- 🔄 **TryHackMe** — Active practice, penetration testing and network analysis
+- 🔄 **Building a production-grade, multi-tier cloud environment on AWS** — provisioned in Terraform, deployed through CI/CD, secured and monitored
+        - Multi-tier architecture (load balancer → compute → database) across a custom VPC
+        - CI/CD automation via GitHub Actions
+        - Security hardening and least-privilege access
+        - Monitoring and observability
+        - Containers and orchestration (Docker, Kubernetes)
+        - Multi-account AWS setup
+        - Python/Boto3 automation
+- 🔄 **Networking fundamentals** — Ongoing. Cisco packet tracer labs, hands-on routing and switching, constantly keeping myself sharp. 
+- 🔄 **TryHackMe** - Occasional. Used when needed. 
 
 ---
+
+## ✅ Completed Projects
+
+- **[Static Portfolio Site — Secure AWS Deployment](projects/AWS/deploy_static_portfolio_S3_CloudFront.md)** — Full console build: S3 (private) + CloudFront + OAC + ACM + Route 53 custom domain. This is what currently serves the live site.
+- **[Static Portfolio Site — Terraform IaC (v1)](projects/AWS/01-terraform-static-portfolio)** — Same core architecture (S3, CloudFront, OAC) rebuilt as code, single `main.tf`
+- **[Static Portfolio Site — Terraform IaC Rebuild (v2)](projects/AWS/02-terraform-static-portfolio-rebuild)** — Refactored into 5 separated files with inline documentation and `force_destroy` handling; full `init → fmt → validate → plan → apply → destroy` lifecycle
+
+*Note: the Terraform builds intentionally use the default `*.cloudfront.net` endpoint rather than the live custom domain, to practice the full IaC lifecycle (including destroy) without risking the production site. The custom domain (ACM + Route 53) remains console-managed for now.*
+
+*(This site — [brandontrigo.com](https://brandontrigo.com) — currently runs on the console-built infrastructure above.)*
 
 ## 🛠️ Technical Background
 
@@ -51,8 +68,8 @@ Real production environment. SLA-driven ticket resolution, hardware installs, st
 **SSRD Cybersecurity Internship — CTF Developer**
 Built 12+ capture the flag challenges targeting real-world vulnerabilities — XSS, SQL injection, RCE, privilege escalation. Deployed via Docker. Used Git for version control throughout.
 
-**Cross-Platform Administration**
-Windows Server, Linux, Active Directory, Group Policy, network troubleshooting across OSI Layers 1–3. Comfortable in both environments.
+**Networking & Systems Fundamentals**
+Solid grounding in networking — OSI Layers 1–4, routing/switching, troubleshooting — built through CCNA-aligned coursework and hands-on labs. Working familiarity with Windows Server, Active Directory, and Group Policy from self-study; comfortable navigating both Windows and Linux environments.
 
 ---
 
@@ -87,4 +104,4 @@ Windows Server, Linux, Active Directory, Group Policy, network troubleshooting a
 
 ---
 
-*Last updated: April 2026*
+*Last updated: June 2026*
