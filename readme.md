@@ -38,13 +38,13 @@ I want to build and manage cloud environments that are well-architected, properl
 ### Active focus
 - 🔄 **AWS Solutions Architect Associate** (SAA-C03)
 - 🔄 **Building a production-grade, multi-tier cloud environment on AWS** — provisioned in Terraform, deployed through CI/CD, secured and monitored
-        - Multi-tier architecture (load balancer → compute → database) across a custom VPC
-        - CI/CD automation via GitHub Actions
-        - Security hardening and least-privilege access
-        - Monitoring and observability
-        - Containers and orchestration (Docker, Kubernetes)
-        - Multi-account AWS setup
-        - Python/Boto3 automation
+    - Multi-tier architecture (load balancer → compute → database) across a custom VPC
+    - CI/CD automation via GitHub Actions
+    - Security hardening and least-privilege access
+    - Monitoring and observability
+    - Containers and orchestration (Docker, Kubernetes)
+    - Multi-account AWS setup
+    - Python/Boto3 automation
 - 🔄 **Networking fundamentals** — Ongoing. Cisco packet tracer labs, hands-on routing and switching, constantly keeping myself sharp. 
 - 🔄 **TryHackMe** - Occasional. Used when needed. 
 
