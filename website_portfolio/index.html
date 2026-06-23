@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brandon Trigo | Cloud Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=JetBrains+Mono:wght@400;500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <img src="images/turtle-meditation.png" alt="Brandon Trigo" class="logo-image">
+                <nav>
+                    <a href="#about">about</a>
+                    <a href="#projects">projects</a>
+                    <a href="#skills">skills</a>
+                    <a href="#experience">experience</a>
+                    <a href="#certifications">certifications</a>
+                    <a href="#contact">contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="about" class="hero">
+            <div class="container">
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-button close"></div>
+                        <div class="terminal-button minimize"></div>
+                        <div class="terminal-button maximize"></div>
+                    </div>
+                    <div class="terminal-body">
+                        <div class="terminal-line">
+                            <span class="prompt">user@portfolio:~$</span> <span class="command">cat about_me.txt</span>
+                        </div>
+                        <div class="terminal-line">
+                            <div class="output">
+                                <h1>Brandon J. Trigo</h1>
+                                <p class="tagline">Cloud Engineer | Security+ | AWS Cloud Practitioner</p>
+                            </div>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="prompt">user@portfolio:~$</span> <span class="command">whoami</span>
+                        </div>
+                        <div class="terminal-line">
+                            <div class="output">
+                            <p style="margin-bottom: 1.5rem;">"Brando"<br>
+                            Cloud Engineer in Training</p>
+
+                            <p style="margin-bottom: 1.5rem;">> Background<br>
+                            I love how infrastructure works — not just at the surface level. The fact that there are fiber cables running across the floor of the ocean carrying signals that get translated into readable information in milliseconds. That when you load a webpage, you're probably hitting a CDN edge node, not the origin server. That you can define an entire network topology in code and a cloud provider will go build it for you. That stuff fascinates me. My background is physical; I've racked servers, terminated fiber, managed structured cabling, and handled remote hands operations in a live colocation environment. Now I'm building upward into cloud architecture and infrastructure engineering.</p>
+
+                            <p style="margin-bottom: 1.5rem;">> Philosophy<br>
+                            Grit (n.) — the drive, stamina, and fortitude to push through any challenge or obstacle until success is achieved. Life happens for us, not to us.</p>
+
+                            <p style="margin-bottom: 1.5rem;">> Current Focus<br>
+                            Building a production-grade, multi-tier cloud environment on AWS — provisioned in Terraform, deployed through CI/CD, secured and monitored. Documenting everything publicly on GitHub.</p>
+
+                            <p style="margin-bottom: 0;">> Core Values<br>
+                            Honor | Integrity | Family | Advancement | Legacy</p>
+                            </div>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="prompt">user@portfolio:~$</span> <span class="command">ls -l current_role</span>
+                        </div>
+                        <div class="terminal-line">
+                            <div class="output">
+                                <span class="output-highlight">-rwxr-xr-x</span> Department Supervisor @ Dick's Sporting Goods | Huntington, NY<br>
+                                <span class="output-highlight">-rwxr-xr-x</span> AWS Certified Cloud Practitioner | CLF-C02 | April 2026<br>
+                                <span class="output-highlight">-rwxr-xr-x</span> CTF Challenge Developer | SSRD Internship (Jan–May 2025)
+                            </div>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="prompt">user@portfolio:~$</span> <span class="cursor"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Featured Projects</h2>
+                    <p class="section-subtitle">Hands-on builds — cloud infrastructure, networking, and security</p>
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div>
+                                <h3 class="project-title">Static Portfolio Infrastructure</h3>
+                            </div>
+                            <span class="project-type">LIVE</span>
+                        </div>
+                        <p class="project-description">
+                            Built this site's AWS infrastructure through the console first to learn each service, then rebuilt it twice in Terraform to codify it as IaC — practicing the full lifecycle on a separate endpoint to keep the live site untouched.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">S3</span>
+                            <span class="tech-tag">CloudFront</span>
+                            <span class="tech-tag">Terraform</span>
+                            <span class="tech-tag">Route 53</span>
+                            <span class="tech-tag">ACM</span>
+                        </div>
+                        <ul class="project-highlights">
+                            <li>Live site runs on S3 + CloudFront + OAC + ACM + Route 53, built via console</li>
+                            <li>Rebuilt twice in Terraform — single-file version, then refactored into 5 separated modules</li>
+                            <li>Full init → plan → apply → destroy lifecycle practiced end to end</li>
+                            <li><a href="https://github.com/Btrigo/my-learning-journey/blob/main/projects/AWS/deploy_static_portfolio_S3_CloudFront.md" target="_blank" style="color: var(--accent-cyan); text-decoration: none;">→ View write-ups on GitHub</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div>
+                                <h3 class="project-title">OWASP Secure Bank CTF Challenges</h3>
+                            </div>
+                            <span class="project-type">INTERNSHIP</span>
+                        </div>
+                        <p class="project-description">
+                            Developed 12+ capture the flag challenges targeting real-world vulnerabilities for SSRD's OWASP Secure Bank project. Built Docker-hosted challenge environments for internal testing and public distribution.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">OWASP</span>
+                        </div>
+                        <ul class="project-highlights">
+                            <li>Simulated XSS, SQL injection, RCE, and privilege escalation attacks</li>
+                            <li>Created PCAP analysis challenges using Wireshark</li>
+                            <li>Implemented SHA-256 hash cracking scenarios</li>
+                            <li>Developed root-level cron job exploitation challenges</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div>
+                                <h3 class="project-title">My Learning Journey</h3>
+                            </div>
+                            <span class="project-type">ONGOING</span>
+                        </div>
+                        <p class="project-description">
+                            Public GitHub repository documenting daily study logs, technical notes, and hands-on projects across cloud, networking, Linux, and security. Built for accountability and transparency.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">AWS</span>
+                            <span class="tech-tag">Linux</span>
+                            <span class="tech-tag">Networking</span>
+                            <span class="tech-tag">Security</span>
+                            <span class="tech-tag">GitHub</span>
+                        </div>
+                        <ul class="project-highlights">
+                            <li>Daily study logs updated consistently</li>
+                            <li>Organized notes across AWS, Linux, networking, and security domains</li>
+                            <li>Hands-on project documentation with write-ups</li>
+                            <li><a href="https://github.com/Btrigo/my-learning-journey" target="_blank" style="color: var(--accent-cyan); text-decoration: none;">→ View on GitHub</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Technical Arsenal</h2>
+                    <p class="section-subtitle">Tools, technologies, and methodologies</p>
+                </div>
+                <div class="skills-container">
+                    <div class="skill-category">
+                        <h3 class="skill-category-title">Cloud & AWS</h3>
+                        <div class="skill-list">
+                            <span class="skill-item">EC2</span>
+                            <span class="skill-item">S3</span>
+                            <span class="skill-item">VPC</span>
+                            <span class="skill-item">Route 53</span>
+                            <span class="skill-item">CloudFront</span>
+                            <span class="skill-item">IAM</span>
+                            <span class="skill-item">CloudWatch</span>
+                            <span class="skill-item">ACM</span>
+                            <span class="skill-item">Terraform</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3 class="skill-category-title">Networking</h3>
+                        <div class="skill-list">
+                            <span class="skill-item">TCP/IP</span>
+                            <span class="skill-item">DNS</span>
+                            <span class="skill-item">DHCP</span>
+                            <span class="skill-item">VLANs</span>
+                            <span class="skill-item">OSI Layers 1–4</span>
+                            <span class="skill-item">Routing & Switching</span>
+                            <span class="skill-item">Fiber Optics (SM/MM)</span>
+                            <span class="skill-item">Structured Cabling</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3 class="skill-category-title">Infrastructure & OS</h3>
+                        <div class="skill-list">
+                            <span class="skill-item">Linux Administration</span>
+                            <span class="skill-item">Data Center Ops</span>
+                            <span class="skill-item">SolarWinds</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3 class="skill-category-title">Security</h3>
+                        <div class="skill-list">
+                            <span class="skill-item">Wireshark</span>
+                            <span class="skill-item">Burp Suite</span>
+                            <span class="skill-item">Metasploit</span>
+                            <span class="skill-item">Nmap</span>
+                            <span class="skill-item">Netcat</span>
+                            <span class="skill-item">OWASP Top 10</span>
+                            <span class="skill-item">CTF Design</span>
+                            <span class="skill-item">TryHackMe</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3 class="skill-category-title">Development & Automation</h3>
+                        <div class="skill-list">
+                            <span class="skill-item">Python</span>
+                            <span class="skill-item">Bash</span>
+                            <span class="skill-item">Docker</span>
+                            <span class="skill-item">Git / GitHub</span>
+                            <span class="skill-item">React</span>
+                            <span class="skill-item">Flask</span>
+                            <span class="skill-item">HTML / CSS</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3 class="skill-category-title">Familiar / Self-Study</h3>
+                        <div class="skill-list">
+                            <span class="skill-item">Windows Server</span>
+                            <span class="skill-item">Active Directory</span>
+                            <span class="skill-item">Group Policy</span>
+                            <span class="skill-item">CCNA</span>
+                            <span class="skill-item">GNS3 Labs</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3 class="skill-category-title">Building Toward</h3>
+                        <div class="skill-list">
+                            <span class="skill-item">CI/CD (GitHub Actions)</span>
+                            <span class="skill-item">Docker Orchestration</span>
+                            <span class="skill-item">Kubernetes</span>
+                            <span class="skill-item">Multi-Account AWS</span>
+                            <span class="skill-item">Python / Boto3</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Experience</h2>
+                    <p class="section-subtitle">Professional journey and key accomplishments</p>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">August 2022 – Present</div>
+                        <h3 class="timeline-title">Department Supervisor</h3>
+                        <div class="timeline-company">Dick's Sporting Goods | Huntington, NY</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Supervise and develop a team of associates across multiple departments, driving key performance metrics including sales targets, conversion rates, and service scores</li>
+                                <li>Serve as a key member of store management, leading shift operations, resolving escalations, and overseeing inventory audits and shrink prevention</li>
+                                <li>Provide technical support for store systems including network-connected POS terminals, printers, and handheld inventory devices</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">January 2025 – May 2025</div>
+                        <h3 class="timeline-title">Security Research & Development Intern</h3>
+                        <div class="timeline-company">SSRD | Remote</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Developed and deployed 12+ CTF challenges targeting real-world vulnerabilities including XSS, SQL injection, RCE, command injection, and privilege escalation</li>
+                                <li>Built Docker-hosted challenge environments for SSRD's OWASP Secure Bank project for internal testing and public GitHub distribution</li>
+                                <li>Created custom scenarios involving Wireshark PCAP analysis, SHA-256 hash cracking, and root-level cron job exploitation</li>
+                                <li>Utilized Burp Suite, Metasploit, Nmap, and Netcat throughout offensive and defensive testing workflows</li>
+                                <li>Managed all version control via Git; practiced full-stack development using React, Flask, and Python</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-date">January 2020 – July 2022</div>
+                        <h3 class="timeline-title">Data Center Support Technician</h3>
+                        <div class="timeline-company">H5 Data Centers | Denver, CO</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Provided Tier 1/2 remote hands support in a high-security colocation environment maintaining 24/7 uptime for critical infrastructure</li>
+                                <li>Resolved 50+ remote hands requests involving hardware replacements, system reboots, cabling issues, and full rack builds</li>
+                                <li>Racked and stacked enterprise servers and terminated structured cabling — CAT5/6, LC/LC, SC/LC, and SC/SC fiber — per industry standards</li>
+                                <li>Enforced physical security protocols: badge access management, vendor escorts, scheduled audits, and data center inspections</li>
+                                <li>Monitored facility-wide systems via SolarWinds; logged and escalated anomalies per SLA requirements</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="certifications" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Certifications</h2>
+                    <p class="section-subtitle">Professional credentials and ongoing education</p>
+                </div>
+                <div class="cert-grid">
+                    <div class="cert-card">
+                        <h3 class="cert-name">AWS Certified Cloud Practitioner</h3>
+                        <p class="cert-issuer">Amazon Web Services (CLF-C02)</p>
+                        <p class="cert-date">Issued: April 2026 | Expires: April 2029</p>
+                    </div>
+                    <div class="cert-card">
+                        <h3 class="cert-name">CompTIA Security+</h3>
+                        <p class="cert-issuer">CompTIA (SY0-701)</p>
+                        <p class="cert-date">Issued: August 2025</p>
+                    </div>
+                    <div class="cert-card">
+                        <h3 class="cert-name">Cybersecurity Bootcamp</h3>
+                        <p class="cert-issuer">Adelphi University / StackRoute</p>
+                        <p class="cert-date">Completed: July 2024</p>
+                    </div>
+                    <div class="cert-card">
+                        <h3 class="cert-name">Associate of Arts</h3>
+                        <p class="cert-issuer">Nassau Community College | 4.0 GPA</p>
+                        <p class="cert-date">Summa Cum Laude | 2019</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Get In Touch</h2>
+                    <p class="section-subtitle">Let's connect and discuss opportunities</p>
+                </div>
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <div class="contact-icon">📧</div>
+                        <div class="contact-label">Email</div>
+                        <a href="mailto:BrandoTrigo5@gmail.com" class="contact-value">BrandoTrigo5@gmail.com</a>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">🔗</div>
+                        <div class="contact-label">LinkedIn</div>
+                        <a href="https://www.linkedin.com/in/brandonjtrigo31" target="_blank" class="contact-value">linkedin.com/in/brandonjtrigo31</a>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">💻</div>
+                        <div class="contact-label">GitHub</div>
+                        <a href="https://github.com/Btrigo" target="_blank" class="contact-value">github.com/Btrigo</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Brandon J. Trigo | Built with passion</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem;">Long Island, NY | Status: Open to opportunities</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
