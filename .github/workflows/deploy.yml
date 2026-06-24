@@ -1,0 +1,31 @@
+name: Deploy Website Portfolio Site
+
+on:
+    push:
+        branches:
+            - main
+        paths:
+            - 'website_portfolio/**'
+
+
+permissions:
+    id-token: write
+    contents: read 
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: configure aws credentials
+              uses: aws-actions/configure-aws-credentials@v4
+              with:
+                  role-to-assume: arn:aws:iam::400953387958:role/github-actions-portfolio-deploy
+                  aws-region: us-east-1
+            
+            - name: sync files to s3
+              run: |
+                  aws s3 sync ./website_portfolio s3://brandontrigo.com --delete
