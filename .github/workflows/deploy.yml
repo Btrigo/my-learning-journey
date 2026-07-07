@@ -29,3 +29,7 @@ jobs:
             - name: sync files to s3
               run: |
                   aws s3 sync ./website_portfolio s3://brandontrigo.com --delete
+
+            - name: invalidate cloudfront cache
+              run: |
+                  aws cloudfront create-invalidation --distribution-id ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
