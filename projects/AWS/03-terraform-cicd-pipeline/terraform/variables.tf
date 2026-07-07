@@ -36,3 +36,8 @@ variable "iam_policy_name" {
   type        = string
   default     = "github-actions-portfolio-s3-deploy"
 }
+
+variable "cloudfront_distribution_id" {
+    description = "ID of the cloudfront distribution the deploy role is permitted to invalidate"
+    type = string
+}

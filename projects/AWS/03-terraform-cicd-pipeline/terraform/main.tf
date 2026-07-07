@@ -29,7 +29,7 @@ resource "aws_iam_role" "github_actions_deploy" {
     ]
   })
 }
-
+data "aws_caller_identity" "current" {}
 resource "aws_iam_role_policy" "s3_deploy" {
   name = var.iam_policy_name
   role = aws_iam_role.github_actions_deploy.id
@@ -49,6 +49,11 @@ resource "aws_iam_role_policy" "s3_deploy" {
           "arn:aws:s3:::${var.s3_bucket_name}",
           "arn:aws:s3:::${var.s3_bucket_name}/*"
         ]
+      },
+      {
+        Effect = "Allow"
+        Action = "cloudfront:CreateInvalidation"
+        Resource = "arn:aws:cloudfront::${data.aws_caller_identity.current.account_id}:distribution/${var.cloudfront_distribution_id}"
       }
     ]
   })
