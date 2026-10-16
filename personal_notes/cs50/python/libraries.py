@@ -1,7 +1,15 @@
+# import random
+
+# def main():
+#     coin = random.choice(["Heads", "Tails"])
+#     print(f"The coin landed on: {coin}")
+
+
+# main()
+
 import random
+import statistics
 
-def main():
-    coin = random.choice(["Heads", "Tails"])
-    print(f"The coin landed on: {coin}")
-
-main()
+cards = ["jack", "queen", "king"]
+random.shuffle(cards) 
+print(f"{cards}")
