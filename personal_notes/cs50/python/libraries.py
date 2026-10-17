@@ -7,9 +7,16 @@
 
 # main()
 
-import random
-import statistics
+# import random
+# import statistics
 
-cards = ["jack", "queen", "king"]
-random.shuffle(cards) 
-print(f"{cards}")
+# cards = ["jack", "queen", "king"]
+# random.shuffle(cards) 
+# print(f"{cards}")
+
+import cowsay
+import sys
+
+if len(sys.argv) == 2:
+    cowsay.trex("hello, " +sys.argv[1])
+    
